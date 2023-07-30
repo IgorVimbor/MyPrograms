@@ -45,12 +45,14 @@ def check_answer():
 # создание окна
 window = Tk()
 
-# Метод geometry() задает размер окна и его расположение на экране.
-# Первые два параметра определяют ширину и высоту окна.
-# Последние два отвечают за «x» и «y» координаты на экране.
-window.geometry('650x350+700+300')
-window.title("Примеры по математике")
-# window.resizable(width=False, height=False)   # запрет растягивания окна
+# устанавливаем ширину и высоту окна.
+width = 650
+heigh = 350
+# определяем координаты центра экрана и размещаем окно
+screenwidth = window.winfo_screenwidth()
+screenheight = window.winfo_screenheight()
+window.geometry('%dx%d+%d+%d'%(width, heigh, (screenwidth-width)/2, (screenheight-heigh)/2))
+window.title("Примеры по математике")   # текст заголовка
 
 # формируем пустые строки (label) для красоты окна
 for i in (2, 4, 6, 7):
@@ -79,11 +81,21 @@ entry_3 = Entry(font=("Arial Bold", 37), width=2)
 entry_3.grid(row=3, column=2)
 
 # формируем, привязываем к функции get_test и размещаем кнопку "Нажми и появится пример"
-btn_1 = Button(window, text="Нажми \nи появится пример", font=("Arial Bold", 12), command=get_test)
+btn_1 = Button(window,
+               text="Нажми \nи появится пример",  # текст на кнопке
+               bg='linen',                        # цвет фона кнопки
+               activebackground='peach puff',     # цвет кнопки при нажатии на нее
+               font=("Arial Bold", 12),           # тип и размер шрифта
+               command=get_test)                  # на какую команду реагирует
 btn_1.grid(row=5, column=1)
 
 # формируем, привязываем к функции check_answer и размещаем кнопку "Проверить"
-btn_2 = Button(window, text="Проверить", font=("Arial Bold", 15), command=check_answer)
+btn_2 = Button(window,
+               text="Проверить",
+               bg='linen',
+               activebackground='peach puff',
+               font=("Arial Bold", 15),
+               command=check_answer)
 btn_2.grid(row=5, column=2)
 
 # формируем и размещаем строку с текстом "Результат:"
