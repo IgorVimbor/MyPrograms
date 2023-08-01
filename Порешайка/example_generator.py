@@ -59,23 +59,31 @@ class Example:
             else:
                 continue
 
-    # метод возвращает пример, сгенерированный методом,
-    # который случайным образом выбран из списка _lst
-    def get_example(self):
+    # метод возвращает пример, сгенерированный методом, который выбирается
+    # из словаря по ключу случайным образом выбранным из списка _lst
+    def get_example(self, flag_2=0, flag_3=0):
         _dct_example = {
             1: self.sum_2_args(),
             2: self.dif_2_args(),
             3: self.sum_3_args(),
             4: self.dif_3_args()
         }
-
-        _lst = [random.randint(1, 4) for _ in range(10)]
-
-        return _dct_example[random.choice(_lst)]
+        # если нужны примеры только с 2-мя числами
+        if flag_2 and not flag_3:
+            _lst_2 = [random.randint(1, 2) for _ in range(10)]
+            return _dct_example[random.choice(_lst_2)]
+        # если нужны примеры только с 3-мя числами
+        if flag_3 and not flag_2:
+            _lst_3 = [random.randint(3, 4) for _ in range(10)]
+            return _dct_example[random.choice(_lst_3)]
+        # если нужны примеры с 2-мя и 3-мя числами
+        if flag_2 and flag_3:
+            _lst = [random.randint(1, 4) for _ in range(10)]
+            return _dct_example[random.choice(_lst)]
 
 
 if __name__ == '__main__':
     obj = Example(20)     # 20 - число-ограничение
 
     for _ in range(5):    # печатаем 5 примеров
-        print(obj.get_example())
+        print(obj.get_example(0, 1))
