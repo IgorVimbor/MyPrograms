@@ -24,14 +24,16 @@ def get_test():
         messagebox.showinfo('ВНИМАНИЕ!', 'Не введено число, в пределах которого\n'
                             'должны быть числа в примерах и результат.\n'
                             'Введите число-ограничение.')
+    flag_1 = entry_bnt_1_state.get()    # считываем значение в первой кнопке-флажке
+    flag_2 = entry_bnt_2_state.get()    # считываем значение во второй кнопке-флажке
     # если поставлен только первый флажок
-    if entry_bnt_1_state.get() and not entry_bnt_2_state.get():
+    if flag_1 and not flag_2:
         entry_2.insert(0, obj.get_example(1, 0))   # в поле для примеров вставляем пример из 2 чисел
     # если поставлен только второй флажок
-    if entry_bnt_2_state.get() and not entry_bnt_1_state.get():
+    if flag_2 and not flag_1:
         entry_2.insert(0, obj.get_example(0, 1))   # в поле для примеров вставляем пример из 3 чисел
     # если поставлены оба флажка
-    if entry_bnt_1_state.get() and entry_bnt_2_state.get():
+    if flag_1 and flag_2:
         entry_2.insert(0, obj.get_example(1, 1))   # в поле для примеров вставляем пример из 2 и 3 чисел
     # если флажки не поставлены
     if not entry_bnt_1_state.get() and not entry_bnt_2_state.get():
