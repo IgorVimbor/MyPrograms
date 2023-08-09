@@ -18,7 +18,7 @@ class Example:
         return x, y, z
 
     # метод генерирует и возвращает задание на сложение ДВУХ чисел
-    def sum_2_args(self):
+    def add_2_args_12(self):
         while True:
             x, y, z = self.get_nums()
             if x + y <= self.limit:
@@ -28,7 +28,7 @@ class Example:
                 continue
 
     # метод генерирует и возвращает задание на вычитание ДВУХ чисел
-    def dif_2_args(self):
+    def sub_2_args_12(self):
         while True:
             x, y, z = self.get_nums()
             if x - y <= self.limit and x - y > 0:
@@ -38,7 +38,7 @@ class Example:
                 continue
 
     # метод генерирует и возвращает задание на сложение ТРЕХ чисел
-    def sum_3_args(self):
+    def add_3_args_12(self):
         while True:
             x, y, z = self.get_nums()
             if x + y + z <= self.limit:
@@ -48,7 +48,7 @@ class Example:
                 continue
 
     # метод генерирует и возвращает задание на вычитание ТРЕХ чисел
-    def dif_3_args(self):
+    def sub_3_args_12(self):
         while True:
             x, y, z = self.get_nums()
             if x - y + z <= self.limit and x - y > 0:
@@ -64,10 +64,10 @@ class Example:
     # из словаря по ключу случайным образом выбранным из списка _lst
     def get_example(self, flag_2=0, flag_3=0):
         _dct_example = {
-            1: self.sum_2_args(),
-            2: self.dif_2_args(),
-            3: self.sum_3_args(),
-            4: self.dif_3_args()
+            1: self.add_2_args_12(),
+            2: self.sub_2_args_12(),
+            3: self.add_3_args_12(),
+            4: self.sub_3_args_12()
         }
         mask = flag_2, flag_3
         # если нужны примеры только с 2-мя числами

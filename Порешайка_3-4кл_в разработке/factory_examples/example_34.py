@@ -20,7 +20,7 @@ class Example:
         return x, y, z
 
     # метод возвращает задание на сложение/вычитание ТРЕХ чисел с использованием скобок
-    def add_sub_3_args(self):
+    def add_sub_3_args_34(self):
         while True:
             x, y, z = self.get_nums()
             if y + z <= self.limit and x - (y + z) >= 0:
@@ -33,13 +33,13 @@ class Example:
                 continue
 
     # метод возвращает задание на умножение в пределах таблицы умножения (в пределах 100)
-    def mul_2_args(self):
+    def mul_2_args_34(self):
         x = random.randint(1, 10)
         y = random.randint(1, 10)
         return f'{x} * {y} ='
 
     # метод возвращает задание на умножение в пределах таблицы умножения (в пределах 100)
-    def div_2_args(self):
+    def div_2_args_34(self):
         while True:
             x = random.randint(1, 10)
             y = random.randint(1, 10)
@@ -50,7 +50,7 @@ class Example:
                 continue
 
     # метод возвращает миксовое задание на деление со сложением/вычитанием
-    def div_mixt(self):
+    def div_mixt_34(self):
         while True:
             x, y, z = self.get_nums()
             if y + z <= self.limit and x % (y + z) == 0:
@@ -63,7 +63,7 @@ class Example:
                 continue
 
     # метод возвращает миксовое задание на умножение со сложением/вычитанием
-    def mul_mixt(self):
+    def mul_mixt_34(self):
         while True:
             x, y, z = self.get_nums()
             if y + z <= self.limit and x * (y + z) <= 100:
@@ -79,11 +79,11 @@ class Example:
     # из словаря по ключу случайным образом выбранным из списка _lst
     def get_example(self, flag_add_sub=0, flag_mul_div=0, flag_all=0):
         _dct_example = {
-            1: self.add_sub_3_args(),
-            2: self.mul_2_args(),
-            3: self.div_2_args(),
-            4: self.mul_mixt(),
-            5: self.div_mixt()
+            1: self.add_sub_3_args_34(),
+            2: self.mul_2_args_34(),
+            3: self.div_2_args_34(),
+            4: self.mul_mixt_34(),
+            5: self.div_mixt_34()
         }
 
         mask = flag_add_sub, flag_mul_div, flag_all
