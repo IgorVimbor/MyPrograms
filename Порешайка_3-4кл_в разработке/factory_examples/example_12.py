@@ -1,11 +1,12 @@
-# Модуль генерирует задания на сложение/вычитание 2 и/или 3 чисел без использования скобок.
+# Модуль генерирует задания на сложение/вычитание 2 и/или 3 чисел
+# без использования скобок в пределах числа-ограничения.
 
 import random
 
 class Example:
     def __init__(self, limit) -> None:
-        """limit: число-ограничение (в пределах этого числа будут слагаемые и результат действий)
-        Например, limit=20 -> слагаемые и результат сложения/вычитания чисел должен быть НЕ более 20.
+        """limit: число-ограничение (в пределах этого числа будут числа в примерах и результат действий)
+        Например, limit=20 -> числа в примерах и результат выполнения действий будет НЕ более 20.
         """
         self.limit = limit     # число-ограничение
 
@@ -68,16 +69,17 @@ class Example:
             3: self.sum_3_args(),
             4: self.dif_3_args()
         }
+        mask = flag_2, flag_3
         # если нужны примеры только с 2-мя числами
-        if flag_2 and not flag_3:
+        if mask == (1, 0):
             _lst_2 = [random.randint(1, 2) for _ in range(10)]
             return _dct_example[random.choice(_lst_2)]
         # если нужны примеры только с 3-мя числами
-        if flag_3 and not flag_2:
+        if mask == (0, 1):
             _lst_3 = [random.randint(3, 4) for _ in range(10)]
             return _dct_example[random.choice(_lst_3)]
         # если нужны примеры с 2-мя и 3-мя числами
-        if flag_2 and flag_3:
+        if mask == (1, 1):
             _lst = [random.randint(1, 4) for _ in range(10)]
             return _dct_example[random.choice(_lst)]
 
@@ -85,5 +87,5 @@ class Example:
 if __name__ == '__main__':
     obj = Example(20)     # 20 - число-ограничение
 
-    for _ in range(5):    # печатаем 5 примеров
-        print(obj.get_example(0, 1))
+    for _ in range(10):    # печатаем 5 примеров
+        print(obj.get_example(1, 1))
