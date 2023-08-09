@@ -85,7 +85,7 @@ class Example_12:
 
 
 if __name__ == '__main__':
-    obj = Example(20)     # 20 - число-ограничение
+    obj = Example_12(20)     # 20 - число-ограничение
 
     for _ in range(10):    # печатаем 5 примеров
         print(obj.get_example(1, 1))
