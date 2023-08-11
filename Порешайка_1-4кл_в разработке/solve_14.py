@@ -2,6 +2,70 @@
 
 from tkinter import *
 from tkinter import messagebox
+from factory_examples.example_12 import Example_12
+from factory_examples.example_34 import Example_34
+
+
+# функция очищает все поля
+def clear():
+    entry_2.delete(0, END)     # удаляем текст из поля для примеров
+    entry_3.delete(0, END)     # удаляем текст из поля для ответов
+    entry_4.delete(0, END)     # удаляем текст из поля для результата
+    # возвращаем поле для смайлика в исходное состояние
+    entry_5 = Entry(font=("Arial Bold", 37), width=2, justify='center')
+    entry_5.grid(row=10, column=10)
+
+
+# функция вставки в поле примера для решения
+def get_test():
+    clear()     # очищаем все поля
+    # проверка - введено или нет число-ограничение
+    try:
+        num = int(entry_1.get())   # считываем с окна число-ограничение
+        obj_12 = Example_12(num)   # создаем экземпляр класса Example_12
+        obj_34 = Example_34(num)   # создаем экземпляр класса Example_34
+    except:
+        messagebox.showinfo('ВНИМАНИЕ!', 'Не введено число, в пределах которого\n'
+                            'должны быть числа в примерах и результат.\n'
+                            'Введите число-ограничение.')
+    flg_1 = entry_bnt_1_state.get()   # считываем значения в кнопках-флажках
+    flg_2 = entry_bnt_2_state.get()
+    flg_3 = entry_bnt_3_state.get()
+    flg_4 = entry_bnt_4_state.get()
+    flg_5 = entry_bnt_5_state.get()
+    
+    if any([flg_3, flg_4, flg_5]):
+        flg_1 = flg_2 = 0
+    
+    mask = flg_1, flg_2, flg_3, flg_4, flg_5
+    
+    # если поставлен только первый флажок
+    if mask == (1, 0, 0, 0, 0):
+        entry_2.insert(0, obj_12.get_example(1, 0))     # в поле для примеров вставляем пример из 2 чисел
+    # если поставлен только второй флажок
+    if mask == (0, 1, 0, 0, 0):
+        entry_2.insert(0, obj_12.get_example(0, 1))     # вставляем пример из 3 чисел
+    # если поставлены оба флажка
+    if mask == (1, 1, 0, 0, 0):
+        entry_2.insert(0, obj_12.get_example(1, 1))     # вставляем пример из 2 и 3 чисел
+    # если поставлен флажок на сложение/вычитание со скобками
+    if mask == (0, 0, 1, 0, 0):
+        entry_2.insert(0, obj_34.get_example(1, 0, 0))  # вставляем пример на сложение/вычитание со скобками
+    # если поставлен флажок на умножение/деление 2-х чисел
+    if mask == (0, 0, 0, 1, 0):
+        entry_2.insert(0, obj_34.get_example(0, 1, 0))  # вставляем пример на умножение/деление 2-х чисел
+    # если поставлен флажок и на сложение/вычитание со скобками и на умножение/деление 2-х чисел
+    if mask == (0, 0, 1, 1, 0):
+        entry_2.insert(0, obj_34.get_example(1, 1, 0))  # вставляем пример
+    # если поставлено несколько флажков в 3-4 классе
+    if mask in [(0, 0, 0, 0, 1), (0, 0, 1, 0, 1), (0, 0, 0, 1, 1), (0, 0, 1, 1, 1)]:
+        entry_2.insert(0, obj_34.get_example(mask[2:])) # вставляем смешанный пример
+    # если флажки не поставлены
+    if not entry_bnt_1_state.get() and not entry_bnt_2_state.get():
+        messagebox.showinfo('ВНИМАНИЕ!', 'Не отмечено количество чисел в примере!\n'
+                            'Выберите количество чисел - поставьте отметку\n'
+                            'в первом или втором или в обоих полях.')
+    entry_3.focus()   # переводим курсор в поле для ответа
 
 
 # создание окна
@@ -53,7 +117,7 @@ entry_bnt_1.grid(row=0, column=1, sticky='w')                   # размеща
 lbl_3 = Label(frm_1, text="3-х чисел:", font=("Arial Bold", 11))
 lbl_3.grid(row=1, column=0, sticky='e')
 
-# формируем и размещаем кнопку-флажок для 2-х чисел
+# формируем и размещаем кнопку-флажок для 3-х чисел
 entry_bnt_2_state = BooleanVar()  # создаем объект для хранения логического значения виджета
 entry_bnt_2_state.set(False)      # устанавливаем значение по умолчанию (флажок выключен)
 entry_bnt_2 = Checkbutton(frm_1, width=3, variable=entry_bnt_2_state)  # создаем объект кнопки-флажка
@@ -63,7 +127,7 @@ entry_bnt_2.grid(row=1, column=1, sticky='w')                   # размеща
 lbl_4 = Label(frm_2, text="Сложение/вычитание со скобками:", font=("Arial Bold", 11))
 lbl_4.grid(row=0, column=0, sticky='e')
 
-# формируем и размещаем кнопку-флажок для 2-х чисел
+# формируем и размещаем кнопку-флажок для cложения/вычитания со скобками
 entry_bnt_3_state = BooleanVar()  # создаем объект для хранения логического значения виджета
 entry_bnt_3_state.set(False)      # устанавливаем значение по умолчанию (флажок выключен)
 entry_bnt_3 = Checkbutton(frm_2, width=3, variable=entry_bnt_3_state)  # создаем объект кнопки-флажка
@@ -73,7 +137,7 @@ entry_bnt_3.grid(row=0, column=1, sticky='w')                   # размеща
 lbl_5 = Label(frm_2, text="Умножение/деление 2-х чисел:", font=("Arial Bold", 11))
 lbl_5.grid(row=1, column=0, sticky='e')
 
-# формируем и размещаем кнопку-флажок для 2-х чисел
+# формируем и размещаем кнопку-флажок для умножения/деления 2-х чисел
 entry_bnt_4_state = BooleanVar()  # создаем объект для хранения логического значения виджета
 entry_bnt_4_state.set(False)      # устанавливаем значение по умолчанию (флажок выключен)
 entry_bnt_4 = Checkbutton(frm_2, width=3, variable=entry_bnt_4_state)  # создаем объект кнопки-флажка
@@ -83,7 +147,7 @@ entry_bnt_4.grid(row=1, column=1, sticky='w')                   # размеща
 lbl_5 = Label(frm_2, text="Смешанные примеры:", font=("Arial Bold", 11))
 lbl_5.grid(row=2, column=0, sticky='e')
 
-# формируем и размещаем кнопку-флажок для 2-х чисел
+# формируем и размещаем кнопку-флажок для смешанных примеров
 entry_bnt_5_state = BooleanVar()  # создаем объект для хранения логического значения виджета
 entry_bnt_5_state.set(False)      # устанавливаем значение по умолчанию (флажок выключен)
 entry_bnt_5 = Checkbutton(frm_2, width=3, variable=entry_bnt_5_state)  # создаем объект кнопки-флажка
@@ -115,7 +179,7 @@ btn_1 = Button(window,
                bg='linen',                        # цвет фона кнопки
                activebackground='peach puff',     # цвет кнопки при нажатии на нее
                font=("Arial Bold", 12),           # тип и размер шрифта
-               command=None)                      # на какую команду реагирует
+               command=get_test)                      # на какую команду реагирует
 btn_1.grid(row=8, column=3, columnspan=5)
 
 # формируем, привязываем к функции check_answer и размещаем кнопку "Проверить"
