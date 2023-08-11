@@ -60,6 +60,7 @@ def get_test():
 def check_answer():
     global cnt_bad, cnt_good
 
+    entry_4.delete(0, END)     # удаляем текст из поля для результата
     # считываем из поля для примеров сам пример, удаляем знак "=" и пробел
     test = entry_2.get().split(' =')[0]       # например: 12 - 10 + 6
 
