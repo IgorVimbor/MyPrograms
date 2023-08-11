@@ -36,15 +36,15 @@ class Example_34:
     def mul_2_args_34(self):
         x = random.randint(1, 10)
         y = random.randint(1, 10)
-        return f'{x} * {y} ='
+        return f'{x} × {y} ='
 
-    # метод возвращает задание на умножение в пределах таблицы умножения (в пределах 100)
+    # метод возвращает задание на деление в пределах таблицы умножения (в пределах 100)
     def div_2_args_34(self):
         while True:
-            x = random.randint(1, 10)
-            y = random.randint(1, 10)
-            if x / y > 0 and x % y == 0:
-                result = f'{x} : {y} ='
+            x = random.randint(1, 100)
+            y = random.randint(1, 100)
+            if x % y == 0:
+                result = f'{x} ∶ {y} ='
                 return result
             else:
                 continue
@@ -54,10 +54,10 @@ class Example_34:
         while True:
             x, y, z = self.get_nums()
             if y + z <= self.limit and x % (y + z) == 0:
-                result = f'{x} : ({y} + {z}) ='
+                result = f'{x} ∶ ({y} + {z}) ='
                 return result
             elif x - y > 0 and (x - y) % z == 0:
-                result = f'({x} - {y}) : {z} ='
+                result = f'({x} - {y}) ∶ {z} ='
                 return result
             else:
                 continue
@@ -67,10 +67,10 @@ class Example_34:
         while True:
             x, y, z = self.get_nums()
             if y + z <= self.limit and x * (y + z) <= 100:
-                result = f'{x} * ({y} + {z}) ='
+                result = f'{x} × ({y} + {z}) ='
                 return result
             elif x - y > 0 and (x - y) * z <= 100:
-                result = f'({x} - {y}) * {z} ='
+                result = f'({x} - {y}) × {z} ='
                 return result
             else:
                 continue
@@ -87,7 +87,7 @@ class Example_34:
         }
 
         mask = flag_add_sub, flag_mul_div, flag_all
-        # если нужны примеры только сложение/вычитание ТРЕХ чисел с использованием скобок
+        # если нужны примеры только сложение/вычитание с использованием скобок
         if mask == (1, 0, 0):
             return _dct_example[1]
         # если нужны примеры только на умножение/деление
@@ -98,8 +98,20 @@ class Example_34:
         if mask == (1, 1, 0):
             _lst_add_div = [random.randint(1, 3) for _ in range(30)]
             return _dct_example[random.choice(_lst_add_div)]
+        # если нужны только смешанные примеры
+        if mask == (0, 0, 1):
+            _lst_mixt = [random.randint(4, 5) for _ in range(20)]
+            return _dct_example[random.choice(_lst_mixt)]
+        # если нужны примеры на сложение/вычитание и смешанные примеры
+        if mask == (1, 0, 1):
+            _lst_add_mixt = [random.choice([1, 4, 5]) for _ in range(30)]
+            return _dct_example[random.choice(_lst_add_mixt)]
+        # если нужны примеры на умножение/деление и смешанные примеры
+        if mask == (0, 1, 1):
+            _lst_mul_mixt = [random.randint(2, 5) for _ in range(40)]
+            return _dct_example[random.choice(_lst_mul_mixt)]
         # если нужны все виды примеров
-        if mask in [(1, 1, 1), (1, 0, 1), (0, 1, 1), (0, 0, 1)]:
+        if mask == (1, 1, 1):
             _lst_all = [random.randint(1, 5) for _ in range(50)]
             return _dct_example[random.choice(_lst_all)]
 
