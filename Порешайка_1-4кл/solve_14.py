@@ -118,7 +118,7 @@ screenheight = window.winfo_screenheight()
 window.geometry('%dx%d+%d+%d'%(width, heigh, (screenwidth-width)/2, (screenheight-heigh)/2))
 window.title(f"ПОРЕШАЙКА by IgorVimbor\n{' ' * 20} Примеры по математике")    # текст заголовка
 
-# формируем пустые строки (label) для красоты окна
+# формируем пустые строки для красоты окна
 for i in (0, 2, 4, 7, 9, 11):
     lbl = Label(window, text='', font=("Arial Bold", 2))
     lbl.grid(row=i, column=0)
