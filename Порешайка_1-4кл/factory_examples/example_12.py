@@ -69,7 +69,9 @@ class Example_12:
             3: self.add_3_args_12(),
             4: self.sub_3_args_12()
         }
+
         mask = flag_2, flag_3
+
         # если нужны примеры только с 2-мя числами
         if mask == (1, 0):
             _lst_2 = [random.randint(1, 2) for _ in range(10)]
