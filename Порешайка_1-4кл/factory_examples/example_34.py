@@ -87,6 +87,7 @@ class Example_34:
         }
 
         mask = flag_add_sub, flag_mul_div, flag_all
+
         # если нужны примеры только сложение/вычитание с использованием скобок
         if mask == (1, 0, 0):
             return _dct_example[1]
