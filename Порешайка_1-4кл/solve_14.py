@@ -42,12 +42,15 @@ def get_test():
     if not any(mask):
         messagebox.showinfo('ВНИМАНИЕ!', 'Не выбран вид примера!\n\n'
                             'ПОСТАВЬТЕ ГАЛОЧКУ В ОДНОМ ИЛИ НЕСКОЛЬКИХ ПОЛЯХ.')
+
     # если поставлены флажки в 1-2 классе и ни одного в 3-4 классе
     if any([flg_1, flg_2]) and not any([flg_3, flg_4, flg_5]):
         entry_2.insert(0, obj_12.get_example(*mask[:2]))
+
     # если поставлены флажки в 3-4 классе и ни одного в 1-2 классе
     if any([flg_3, flg_4, flg_5]) and not any([flg_1, flg_2]):
         entry_2.insert(0, obj_34.get_example(*mask[2:]))
+
     # если поставлены флажки и в 1-2 классе и в 3-4 классе
     if any([flg_1, flg_2]) and any([flg_3, flg_4, flg_5]):
         result = random.choice([obj_12.get_example(*mask[:2]), obj_34.get_example(*mask[2:])])
