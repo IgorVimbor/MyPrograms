@@ -61,9 +61,9 @@ def check_answer():
     global cnt_bad, cnt_good
 
     entry_4.delete(0, END)     # удаляем текст из поля для результата
+
     # считываем из поля для примеров сам пример, удаляем знак "=" и пробел
     test = entry_2.get().split(' =')[0]       # например: 12 - 10 + 6
-
     # заменяем знаки Юникода '×' и '∶'
     test = test.replace('∶', '/') if '∶' in test else test
     test = test.replace('×', '*') if '×' in test else test
@@ -89,9 +89,18 @@ def check_answer():
             cnt_bad += 1                      # увеличиваем счетчик на 1
             entry_7.delete(0, END)            # удаляем старое значение счетчика из поля
             entry_7.insert(0, f'{cnt_bad}')   # вставляем новое значение счетчика
+            messagebox.showinfo('НЕПРАВИЛЬНЫЙ ОТВЕТ!', 'ПОДУМАЙТЕ, ИСПРАВЬТЕ ОТВЕТ\n\n'
+                            'И НАЖМИТЕ КНОПКУ "Проверить".')
     except:
         messagebox.showinfo('ОШИБКА!', 'Нельзя проверить то, чего нет )))\n\n'
                             'НАЖМИТЕ КНОПКУ "Нажми и появится пример".')
+
+
+# функция для запрета накручивания счетчика правильно решенных примеров
+def stop_repets():
+    res = entry_4.get()
+    check_answer() if not res or res == 'Не правильно' else None
+
 
 cnt_good = cnt_bad = 0   # счетчики решеных примеров
 
@@ -207,7 +216,7 @@ btn_2 = Button(window,
                bg='linen',
                activebackground='peach puff',
                font=("Arial Bold", 15),
-               command=check_answer)
+               command=stop_repets)
 btn_2.grid(row=8, column=8, columnspan=9)
 
 # формируем и размещаем строку с текстом "Результат:"
