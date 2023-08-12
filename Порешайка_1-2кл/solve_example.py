@@ -47,6 +47,8 @@ def get_test():
 def check_answer():
     global cnt_bad, cnt_good
 
+    entry_4.delete(0, END)     # удаляем текст из поля для результата
+
     # считываем из поля для примеров сам пример, удаляем знак "=" и пробел
     test = entry_2.get().split(' =')[0]       # например: 12 - 10 + 6
 
@@ -71,9 +73,18 @@ def check_answer():
             cnt_bad += 1                      # увеличиваем счетчик на 1
             entry_7.delete(0, END)            # удаляем старое значение счетчика из поля
             entry_7.insert(0, f'{cnt_bad}')   # вставляем новое значение счетчика
+            messagebox.showwarning('НЕПРАВИЛЬНЫЙ ОТВЕТ!', 'ПОДУМАЙТЕ, ИСПРАВЬТЕ ОТВЕТ\n\n'
+                                   'И НАЖМИТЕ КНОПКУ "Проверить"...\n\n'
+                                   'ИЛИ РЕШИТЕ ДРУГОЙ ПРИМЕР.')
     except:
         messagebox.showinfo('ОШИБКА!', 'Нельзя проверить то, чего нет )))\n'
                             'Нажмите кнопку "Нажми и появится пример".')
+
+
+# функция для запрета накручивания счетчика правильно решенных примеров
+def stop_repets():
+    res = entry_4.get()
+    check_answer() if not res or res == 'Не правильно' else None
 
 
 cnt_good = cnt_bad = 0   # счетчики решеных примеров
@@ -104,7 +115,7 @@ entry_1 = Entry(font=("Arial Bold", 20), width=3)
 entry_1.grid(row=0, column=2, sticky='w')
 entry_1.focus()   # переводим курсор в поле для ввода числа-ограничения
 
-# формируем и размещаем строку с текстом "Число-ограничение:"
+# формируем и размещаем строку с текстом "Показывать примеры с 2-мя числами:"
 lbl_2 = Label(window, text="Показывать примеры с 2-мя числами:", font=("Arial Bold", 12))
 lbl_2.grid(row=1, column=1, sticky='e')
 
@@ -114,7 +125,7 @@ entry_bnt_1_state.set(False)      # устанавливаем значение 
 entry_bnt_1 = Checkbutton(width=3, variable=entry_bnt_1_state)  # создаем объект кнопки-флажка
 entry_bnt_1.grid(row=1, column=2, sticky='w')                   # размещаем кнопку-флажок
 
-# формируем и размещаем строку с текстом "Число-ограничение:"
+# формируем и размещаем строку с текстом "с 3-мя числами:"
 lbl_3 = Label(window, text="с 3-мя числами:", font=("Arial Bold", 12))
 lbl_3.grid(row=2, column=1, sticky='e')
 
@@ -151,7 +162,7 @@ btn_2 = Button(window,
                bg='linen',
                activebackground='peach puff',
                font=("Arial Bold", 15),
-               command=check_answer)
+               command=stop_repets)
 btn_2.grid(row=7, column=2)
 
 # формируем и размещаем строку с текстом "Результат:"
