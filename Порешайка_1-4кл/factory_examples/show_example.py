@@ -1,4 +1,5 @@
-# Модуль возвращает одно задание из перечня методов модуля examples.py
+# Модуль возвращает одно задание из перечня методов модуля examples.py,
+# которое затем будет показано в окне приложения Порешайка
 
 import random
 from factory_examples.examples import Addsub, Muldiv, Mix
