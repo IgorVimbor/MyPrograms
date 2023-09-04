@@ -12,7 +12,7 @@ def clear():
     entry_4.delete(0, END)     # удаляем текст из поля для результата
     # возвращаем поле для смайлика в исходное состояние
     entry_5 = Entry(font=("Arial Bold", 37), width=2, justify='center')
-    entry_5.grid(row=10, column=10)
+    entry_5.grid(row=10, column=8)
 
 
 # функция вставки в поле задания для решения
