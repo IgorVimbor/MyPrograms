@@ -14,7 +14,7 @@ class Example:
         Например, limit=20 -> числа в примерах будут НЕ более 20.
         Результаты вычисления примеров - в пределах 100.
         """
-        self.limit = limit     # число-ограничение
+        self.limit = limit  # число-ограничение
 
     # метод возвращает три рандомных числа в пределах ограничения limit
     def get_nums(self):
@@ -36,7 +36,7 @@ class Addsub(Example):
             x, y, z = self.get_nums()
             if x + y > 100:
                 continue
-            return f'{x} + {y} ='
+            return f"{x} + {y} ="
 
     # метод возвращает задание на вычитание ДВУХ чисел с результатом больше нуля
     def sub_2args_wb(self):
@@ -44,7 +44,7 @@ class Addsub(Example):
             x, y, z = self.get_nums()
             if x - y < 0:
                 continue
-            return f'{x} - {y} ='
+            return f"{x} - {y} ="
 
     # метод возвращает задание на сложение ТРЕХ чисел с результатом в пределах 100
     def add_3args_wb(self):
@@ -52,7 +52,7 @@ class Addsub(Example):
             x, y, z = self.get_nums()
             if x + y + z > 100:
                 continue
-            return f'{x} + {y} + {z} ='
+            return f"{x} + {y} + {z} ="
 
     # метод возвращает задание на вычитание ТРЕХ чисел с результатом больше нуля
     def sub_3args_wb(self):
@@ -60,29 +60,29 @@ class Addsub(Example):
             x, y, z = self.get_nums()
             if x - y - z < 0:
                 continue
-            return f'{x} - {y} - {z} ='
+            return f"{x} - {y} - {z} ="
 
     # метод возвращает задание на сложение/вычитание ТРЕХ чисел без использования скобок
     def addsub_3args_wb(self):
         while True:
             x, y, z = self.get_nums()
             if x - y >= 0 and x - y + z <= 100:
-                return f'{x} - {y} + {z} ='
+                return f"{x} - {y} + {z} ="
             elif x + y > 100 or x + y - z < 0:
                 continue
-            return f'{x} + {y} - {z} ='
+            return f"{x} + {y} - {z} ="
 
     # метод возвращает задание на сложение/вычитание ТРЕХ чисел с использованием скобок
     def addsub_3args(self):
         while True:
             x, y, z = self.get_nums()
             if 0 <= x - (y + z) <= 100:
-                return f'{x} - ({y} + {z}) ='
+                return f"{x} - ({y} + {z}) ="
             if y - z > 0 and x - (y - z) > 0:
-                return f'{x} - ({y} - {z}) ='
+                return f"{x} - ({y} - {z}) ="
             elif y - z < 0 or x + (y - z) > 100:
                 continue
-            return f'{x} + ({y} - {z}) ='
+            return f"{x} + ({y} - {z}) ="
 
 
 class Muldiv:
@@ -92,7 +92,7 @@ class Muldiv:
     def mul_2args_wb(self):
         x = random.randint(1, 10)
         y = random.randint(1, 10)
-        return f'{x} · {y} ='
+        return f"{x} · {y} ="
 
     # метод возвращает задание на деление в пределах 100
     def div_2args_wb(self):
@@ -101,11 +101,12 @@ class Muldiv:
             y = random.randint(1, 100)
             if x % y != 0:
                 continue
-            return f'{x} ∶ {y} ='
+            return f"{x} ∶ {y} ="
 
 
 class Mix(Example):
     """дочерний класс для генерации заданий на умножение/деление со сложением/вычитанием без/с скобок/скобками"""
+
     def __init__(self, limit) -> None:
         super().__init__(limit)
 
@@ -115,10 +116,10 @@ class Mix(Example):
             a = random.randint(1, 10)
             x, y, z = self.get_nums()
             if a * y + z <= 100:
-                return f'{a} · {y} + {z} ='
+                return f"{a} · {y} + {z} ="
             elif y - z * a < 0:
                 continue
-            return f'{y} - {z} · {a} ='
+            return f"{y} - {z} · {a} ="
 
     # метод возвращает миксовое задание на деление со сложением/вычитанием без использования скобок
     def div_mix_wb(self):
@@ -128,10 +129,10 @@ class Mix(Example):
             if y % a != 0:
                 continue
             if x + int(y / a) <= 100:
-                return f'{x} + {y} ∶ {a} ='
+                return f"{x} + {y} ∶ {a} ="
             elif x - int(y / a) < 0:
                 continue
-            return f'{x} - {y} ∶ {a} ='
+            return f"{x} - {y} ∶ {a} ="
 
     # метод возвращает миксовое задание на умножение со сложением/вычитанием с использованием скобок
     def mul_mix(self):
@@ -139,10 +140,10 @@ class Mix(Example):
             a = random.randint(1, 10)
             x, y, z = self.get_nums()
             if a * (y + z) <= 100:
-                return f'{a} · ({y} + {z}) ='
+                return f"{a} · ({y} + {z}) ="
             elif y - z < 0 or (y - z) * a > 100:
                 continue
-            return f'({y} - {z}) · {a} ='
+            return f"({y} - {z}) · {a} ="
 
     # метод возвращает миксовое задание на деление со сложением/вычитанием с использованием скобок
     def div_mix(self):
@@ -150,7 +151,7 @@ class Mix(Example):
             a = random.randint(1, 10)
             x, y, z = self.get_nums()
             if a % (y + z) == 0:
-                return f'{a} ∶ ({y} + {z}) ='
+                return f"{a} ∶ ({y} + {z}) ="
             elif y - z < 0 or (y - z) % a != 0:
                 continue
-            return f'({y} - {z}) ∶ {a} ='
+            return f"({y} - {z}) ∶ {a} ="
