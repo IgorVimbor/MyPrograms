@@ -297,3 +297,5 @@ entry_7.insert(0, "0")  # вставляем в поле счетчика циф
 
 # запуск приложения
 window.mainloop()
+
+# pyinstaller --onefile --windowed --add-data "sound_good.wav;." --add-data "sound_bad.wav;." ПОРЕШАЙКА_v2.py
